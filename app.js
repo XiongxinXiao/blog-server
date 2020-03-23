@@ -18,6 +18,8 @@ const user = require('./routes/user')
 
 const { REDIS_CONF } = require('./config/db')
 
+const ENV = process.env.NODE_ENV;
+
 // error handler
 onerror(app)
 
@@ -26,7 +28,9 @@ app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
 app.use(json())
-app.use(logger())
+if (ENV !== 'production') {
+  app.use(logger())
+}
 app.use(require('koa-static')(__dirname + '/public'))
 
 app.use(views(__dirname + '/views', {
@@ -34,16 +38,16 @@ app.use(views(__dirname + '/views', {
 }))
 
 // logger
-app.use(async (ctx, next) => {
-  const start = new Date()
-  await next()
-  const ms = new Date() - start
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-})
+if (ENV !== 'production') {
+  app.use(async (ctx, next) => {
+    const start = new Date()
+    await next()
+    const ms = new Date() - start
+    console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+  })
+}
 
 // morgan log
-const ENV = process.env.NODE_ENV;
-//console.log(ENV);
 if (ENV !== 'production') {
   app.use(morgan('dev'));
 }else {
