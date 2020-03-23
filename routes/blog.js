@@ -14,7 +14,7 @@ router.get('/list', async (ctx, next) => {
     const keyword = ctx.query.keyword || '';
 
     if (ctx.query.isadmin) {
-        console.log('is admin');
+        //console.log('is admin');
         // admin page
         if (ctx.session.username == null) {
             console.error('is admin, but did not login');

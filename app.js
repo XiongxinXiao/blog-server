@@ -43,7 +43,7 @@ app.use(async (ctx, next) => {
 
 // morgan log
 const ENV = process.env.NODE_ENV;
-console.log(ENV);
+//console.log(ENV);
 if (ENV !== 'production') {
   app.use(morgan('dev'));
 }else {

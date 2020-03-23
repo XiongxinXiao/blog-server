@@ -6,7 +6,7 @@ let REDIS_CONF;
 
 if (env === 'dev') {
     MYSQL_CONF = {
-        host: 'localhost',
+        host: 'ec2-35-183-122-216.ca-central-1.compute.amazonaws.com',
         user: 'root',
         password: 'XxxYy0708',
         port: '3306',
@@ -21,7 +21,7 @@ if (env === 'dev') {
 
 if (env === 'production') {
     MYSQL_CONF = {
-        host: 'localhost',
+        host: 'ec2-35-183-122-216.ca-central-1.compute.amazonaws.com',
         user: 'root',
         password: 'XxxYy0708',
         port: '3306',
